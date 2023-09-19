@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TAMBAH MOTOR</title>
+        <!-- Menggunakan Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <h1>TAMBAH MOTOR</h1>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">SISTEM INFORMASI MOTOR</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="DATA_MOTOR.html">DATA MOTOR</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="TAMBAH_MOTOR.html">TAMBAH MOTOR</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="PRODUSEN_MOTOR.html">PRODUSEN MOTOR</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <form>
+                <div class="form-group">
+                    <label for="nama_varian">Nama Varian:</label>
+                    <label id="error_nama_varian" style="color: red"></label>
+                    <input type="text" class="form-control" id="nama_varian">
+                </div>
+                <div class="form-group">
+                    <label for="nilai_cc">Nilai CC:</label>
+                    <label id="error_nilai_cc" style="color: red"></label>
+                    <input type="text" class="form-control" id="nilai_cc">
+                </div>
+                <div class="form-group">
+                    <label>Transmisi:</label>
+                    <label id="error_transmisi" style="color: red"></label><br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="transmisi" id="matic" value="matic">
+                        <label class="form-check-label" for="matic">Matic</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="transmisi" id="kopling" value="kopling">
+                        <label class="form-check-label" for="kopling">Kopling</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="transmisi" id="gigi" value="gigi">
+                        <label class="form-check-label" for="gigi">Gigi</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="produsen">Produsen:</label>
+                    <label id="error_produsen" style="color: red"></label>
+                    <select class="form-control" id="produsen">
+                        <option value="Yamaha">Yamaha</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Suzuki">Suzuki</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mataKuliah">Fitur:</label>
+                    <label id="error_fitur" style="color: red"></label><br>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="fitur1" value="HEMAT BENSIN">
+                        <label class="form-check-label" for="fitur1">HEMAT BENSIN</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="fitur2" value="KECEPATAN TINGGI">
+                        <label class="form-check-label" for="fitur2">KECEPATAN TINGGI</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Service:</label>
+                    <label id="error_email" style="color: red"></label>
+                    <input type="text" class="form-control" id="email">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="validate()">Kirim</button>
+            </form>
+        </div>
+    </body>
+
+    <script>
+        function validate() {
+            // Get the values of the form fields
+            var nama_varian = document.getElementById("nama_varian").value;
+            var nilai_cc = document.getElementById("nilai_cc").value;
+            var transmisi = document.querySelector('input[name="transmisi"]:checked');
+            var produsen = document.getElementById("produsen").value;
+            var fitur1 = document.getElementById("fitur1").checked;
+            var fitur2 = document.getElementById("fitur2").checked;
+            var email = document.getElementById("email").value;
+    
+            // Reset error messages
+            document.getElementById("error_nama_varian").textContent = "";
+            document.getElementById("error_nilai_cc").textContent = "";
+            document.getElementById("error_transmisi").textContent = "";
+            document.getElementById("error_produsen").textContent = "";
+            document.getElementById("error_fitur").textContent = "";
+            document.getElementById("error_email").textContent = "";
+    
+            // Perform validation
+            var isValid = true;
+    
+            if (nama_varian === "") {
+                document.getElementById("error_nama_varian").textContent = "Nama Varian harus diisi.";
+                isValid = false;
+            }
+    
+            if (nilai_cc === "") {
+                document.getElementById("error_nilai_cc").textContent = "Nilai CC harus diisi.";
+                isValid = false;
+            } else if (isNaN(nilai_cc) || parseFloat(nilai_cc) <= 0) {
+                document.getElementById("error_nilai_cc").textContent = "Nilai CC harus berupa angka positif.";
+                isValid = false;
+            }
+    
+            if (!transmisi) {
+                document.getElementById("error_transmisi").textContent = "Transmisi harus dipilih.";
+                isValid = false;
+            }
+    
+            if (produsen === "") {
+                document.getElementById("error_produsen").textContent = "Produsen harus dipilih.";
+                isValid = false;
+            }
+    
+            if (!fitur1 && !fitur2) {
+                document.getElementById("error_fitur").textContent = "Pilih setidaknya satu fitur.";
+                isValid = false;
+            }
+    
+            // Email validation using a regular expression
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById("error_email").textContent = "Email tidak valid.";
+                isValid = false;
+            }
+    
+            // If the form is valid, you can submit it or perform further actions here.
+            if (isValid) {
+                // Your code to submit the form or perform other actions goes here
+                alert("Form is valid and can be submitted.");
+            }
+        }
+    </script>    
+</html>
